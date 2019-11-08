@@ -169,7 +169,7 @@ class Parser
                 } else {
                     $config = $this->Config->get($this->Query->asn);
                 }
-                
+
                 if ($config['server'] == '' || $this->Query->domain == '') {
                     $config = $this->Config->get('iana');
                 }
@@ -288,7 +288,12 @@ class Parser
         $Config = $this->Config->getCurrent();
 
         $Template = AbstractTemplate::factory($Config['template'], $this->customTemplateNamespace);
+        if ($Template instanceof AbstractTemplate) {
 
+        }else{
+            $Config['template'] = 'standard';
+            $Template = AbstractTemplate::factory($Config['template'], $this->customTemplateNamespace);
+        }
         // If Template is null then we do not have a template for that, but we
         // can still proceed to the end with just the rawdata
         if ($Template instanceof AbstractTemplate) {
