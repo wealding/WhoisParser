@@ -288,9 +288,7 @@ class Parser
         $Config = $this->Config->getCurrent();
 
         $Template = AbstractTemplate::factory($Config['template'], $this->customTemplateNamespace);
-        if ($Template instanceof AbstractTemplate) {
-
-        }else{
+        if (!($Template instanceof AbstractTemplate)) {
             $Config['template'] = 'standard';
             $Template = AbstractTemplate::factory($Config['template'], $this->customTemplateNamespace);
         }
