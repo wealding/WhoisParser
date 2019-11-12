@@ -71,7 +71,7 @@ class Socket extends AbstractAdapter
         $rawdata = '';
 
         do {
-            if (stream_select($read, $write, $except, 30) === false) {
+            if (stream_select($read, $write, $except, 15) === false) {
                 break;
             }
 
@@ -123,7 +123,7 @@ class Socket extends AbstractAdapter
         }
         else {
             $errno = $errstr = null;
-            $this->sock = @stream_socket_client('tcp://' . $config['server'] . ':' . $config['port'], $errno, $errstr, 30);
+            $this->sock = @stream_socket_client('tcp://' . $config['server'] . ':' . $config['port'], $errno, $errstr, 15);
         }
 
         if (! is_resource($this->sock)) {
